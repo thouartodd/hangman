@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title class="propertext">Hangman</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<h1 class="propertext">Hangman</h1>
+</head>
+<body>
+	<p>Wins: {{wins}}/Losses: {{losses}}</p>
+	<img src="/static/img/{{guessLeft}}.png">
+	<p>{{shownWord}}</p>
+	<p>Already Guessed: {{guessList}}</p>
+	<p>Guesses left: {{guessLeft}}</p>
+	
+	<form action="/hangman/guess" method="post">
+		<input type="text" name="guess" autofocus>
+		<input type="submit" value="Guess">
+		<p>
+		{% if session['fail'] %}
+			{{session['fail']}}
+		{% endif %}
+		{% if session['success'] %}
+			{{session['success']}}
+		{% endif %}
+		</p>
+		<input type="button" value="Quit" onclick="window.location='/hangman/done';" >
+	</form>
+</body>
+</html>
